@@ -33,8 +33,11 @@ logs/
 
 # Output
 output/
-*.json
+output/*.json
 *.csv
+
+# Allow config files
+!config/*.json
 
 # Temporary files
 /tmp/

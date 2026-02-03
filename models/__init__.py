@@ -2,6 +2,7 @@
 Data models for Agri-Market Scraper Engine
 """
 
-from .market_price import MarketPrice, Commodity, Currency, Unit, SourceConfig
+# Use simplified models that work reliably
+from .market_price_simple import MarketPrice, Commodity, Currency, Unit, SourceConfig, ScraperResult
 
-__all__ = ['MarketPrice', 'Commodity', 'Currency', 'Unit', 'SourceConfig']
+__all__ = ['MarketPrice', 'Commodity', 'Currency', 'Unit', 'SourceConfig', 'ScraperResult']

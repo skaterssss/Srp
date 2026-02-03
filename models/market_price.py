@@ -57,8 +57,7 @@ class MarketPrice(BaseModel):
     
     model_config = ConfigDict(
         str_strip_whitespace=True,
-        validate_assignment=True,
-        use_enum_values=False
+        validate_assignment=True
     )
     
     date: date = Field(
@@ -81,8 +80,7 @@ class MarketPrice(BaseModel):
     price: Decimal = Field(
         ...,
         ge=0,
-        decimal_places=2,
-        description="Price value (must be non-negative)"
+        description="Price value (must be non-negative, max 2 decimal places)"
     )
     
     currency: Currency = Field(
