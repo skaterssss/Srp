@@ -1,0 +1,83 @@
+{
+  "sources": [
+    {
+      "id": "nl_boerderij_aardappel",
+      "name": "Boerderij.nl - Aardappelprijzen",
+      "url": "https://www.boerderij.nl/marktinformatie/aardappelen",
+      "country": "NL",
+      "type": "html_table",
+      "frequency": "daily",
+      "active": true,
+      "selectors": {
+        "table_selector": "table.market-prices",
+        "date_column": 0,
+        "commodity_column": 1,
+        "variety_column": 2,
+        "price_column": 3
+      }
+    },
+    {
+      "id": "de_ami_kartoffel",
+      "name": "AMI - Kartoffelpreise",
+      "url": "https://www.ami-informiert.de/ami-maerkte/ami-kartoffeln",
+      "country": "DE",
+      "type": "dynamic",
+      "frequency": "weekly",
+      "active": true,
+      "selectors": {
+        "wait_for": "div[data-market-loaded='true']",
+        "table_selector": "table.price-overview"
+      }
+    },
+    {
+      "id": "pl_wgro_ziemniak",
+      "name": "WGRO - Ceny Ziemniaków",
+      "url": "https://www.wgro.pl/ceny-ziemniakow",
+      "country": "PL",
+      "type": "html_table",
+      "frequency": "daily",
+      "active": true,
+      "selectors": {
+        "table_selector": "table.table-prices"
+      }
+    },
+    {
+      "id": "uk_ahdb_potato",
+      "name": "AHDB - GB Potato Prices",
+      "url": "https://ahdb.org.uk/cereals-oilseeds/gb-potato-prices",
+      "country": "GB",
+      "type": "pdf",
+      "frequency": "weekly",
+      "active": true,
+      "pdf_config": {
+        "download_url": "https://ahdb.org.uk/cereals-oilseeds/gb-potato-prices.pdf",
+        "extraction_method": "table"
+      }
+    },
+    {
+      "id": "fr_rungis_oignon",
+      "name": "Rungis Market - Prix des Oignons",
+      "url": "https://www.rungisinternational.com/prix-marche",
+      "country": "FR",
+      "type": "unstructured_text",
+      "frequency": "daily",
+      "active": false,
+      "llm_config": {
+        "model": "gpt-4-turbo-preview",
+        "extraction_prompt": "Extract potato and onion prices with dates, varieties, and units from this market report."
+      }
+    },
+    {
+      "id": "be_vegebe_ui",
+      "name": "Vegebe - Uienprijzen België",
+      "url": "https://www.vegebe.be/nl/marktinfo/uien",
+      "country": "BE",
+      "type": "html_table",
+      "frequency": "daily",
+      "active": true,
+      "selectors": {
+        "table_selector": "table.market-table"
+      }
+    }
+  ]
+}
