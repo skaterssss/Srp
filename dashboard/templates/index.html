@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🌾 Agri-Market Scraper Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding-bottom: 80px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .stat-card:active {
+            transform: scale(0.98);
+        }
+
+        .stat-card .value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .stat-card .label {
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        .price-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .price-item .variety {
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .price-item .price {
+            font-size: 24px;
+            color: #28a745;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .price-item .meta {
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .price-item .meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 0;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .filter-tab {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            color: #667eea;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .filter-tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-state .icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .refresh-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #667eea;
+            color: white;
+            border: none;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .refresh-btn:active {
+            transform: scale(0.95);
+        }
+
+        .refresh-btn.spinning {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .chart {
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            padding: 20px 0;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            border-radius: 5px 5px 0 0;
+            min-height: 20px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .chart-bar .label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            color: #666;
+            white-space: nowrap;
+        }
+
+        .chart-bar .value {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: bold;
+            color: #667eea;
+            font-size: 14px;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-indicator.success {
+            background: #28a745;
+        }
+
+        .status-indicator.error {
+            background: #dc3545;
+        }
+
+        .status-indicator.running {
+            background: #ffc107;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-card .value {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>
+            🌾 Agri-Market Scraper
+        </h1>
+        <div class="subtitle">Real-time prijsdata uit Europa</div>
+    </div>
+
+    <div class="container">
+        <!-- Statistics -->
+        <div class="stats-grid" id="stats">
+            <div class="stat-card">
+                <div class="label">Bronnen</div>
+                <div class="value" id="total-sources">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Succesvol</div>
+                <div class="value" id="successful">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Prijzen</div>
+                <div class="value" id="total-prices">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Laatst bijgewerkt</div>
+                <div class="value" style="font-size: 14px;" id="last-update">-</div>
+            </div>
+        </div>
+
+        <!-- Country Distribution -->
+        <div class="card">
+            <h2>📊 Verdeling per Land</h2>
+            <div class="chart" id="country-chart"></div>
+        </div>
+
+        <!-- Commodity Filter -->
+        <div class="card">
+            <h2>🔍 Filter</h2>
+            <div class="filter-tabs" id="filters">
+                <div class="filter-tab active" data-filter="all">Alles</div>
+                <div class="filter-tab" data-filter="Potato">🥔 Aardappelen</div>
+                <div class="filter-tab" data-filter="Onion">🧅 Uien</div>
+                <div class="filter-tab" data-filter="Carrot">🥕 Wortelen</div>
+            </div>
+        </div>
+
+        <!-- Price List -->
+        <div class="card">
+            <h2>💰 Actuele Prijzen</h2>
+            <div id="prices-container">
+                <div class="loading">Laden</div>
+            </div>
+        </div>
+
+        <!-- Legal Compliance Note -->
+        <div class="card" style="background: #e8f5e9; border-left: 4px solid #28a745;">
+            <h2>⚖️ Legal Compliance</h2>
+            <p style="color: #666; line-height: 1.6;">
+                ✅ Alle bronnen zijn <strong>legaal scrapeable</strong> volgens EU wetgeving.
+                We verzamelen alleen publieke marktprijzen (feiten zonder copyright).
+                <br><br>
+                <small>Zie LEGAL_COMPLIANCE.md voor volledige analyse.</small>
+            </p>
+        </div>
+    </div>
+
+    <button class="refresh-btn" id="refresh-btn" title="Ververs data">
+        🔄
+    </button>
+
+    <script>
+        let currentFilter = 'all';
+
+        async function loadSummary() {
+            try {
+                const response = await fetch('/api/summary');
+                const data = await response.json();
+
+                // Update stats
+                document.getElementById('total-sources').textContent = data.total_sources || 0;
+                document.getElementById('successful').textContent = data.successful || 0;
+                document.getElementById('total-prices').textContent = data.total_prices || 0;
+                
+                if (data.latest_update) {
+                    const date = new Date(data.latest_update);
+                    document.getElementById('last-update').textContent = 
+                        date.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+                }
+
+                // Update country chart
+                updateCountryChart(data.by_country);
+
+            } catch (error) {
+                console.error('Error loading summary:', error);
+            }
+        }
+
+        function updateCountryChart(byCountry) {
+            const chartContainer = document.getElementById('country-chart');
+            chartContainer.innerHTML = '';
+
+            if (!byCountry || Object.keys(byCountry).length === 0) {
+                chartContainer.innerHTML = '<div style="width: 100%; text-align: center; color: #666;">Geen data beschikbaar</div>';
+                return;
+            }
+
+            const maxValue = Math.max(...Object.values(byCountry));
+
+            Object.entries(byCountry).forEach(([country, count]) => {
+                const height = (count / maxValue) * 100;
+                const bar = document.createElement('div');
+                bar.className = 'chart-bar';
+                bar.style.height = height + '%';
+                bar.innerHTML = `
+                    <div class="value">${count}</div>
+                    <div class="label">${country}</div>
+                `;
+                chartContainer.appendChild(bar);
+            });
+        }
+
+        async function loadPrices() {
+            const container = document.getElementById('prices-container');
+            container.innerHTML = '<div class="loading">Laden</div>';
+
+            try {
+                const url = currentFilter === 'all' 
+                    ? '/api/prices' 
+                    : `/api/prices?commodity=${currentFilter}`;
+                
+                const response = await fetch(url);
+                const prices = await response.json();
+
+                if (!prices || prices.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <div class="icon">📭</div>
+                            <p>Nog geen prijsdata beschikbaar.</p>
+                            <p style="margin-top: 10px; font-size: 14px;">
+                                Run de scraper om data te verzamelen:
+                                <br><code>python3 orchestrator.py</code>
+                            </p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = '';
+
+                prices.forEach(price => {
+                    const item = document.createElement('div');
+                    item.className = 'price-item';
+                    
+                    const currencySymbol = {
+                        'EUR': '€',
+                        'GBP': '£',
+                        'PLN': 'zł',
+                        'USD': '$'
+                    }[price.currency] || price.currency;
+
+                    item.innerHTML = `
+                        <div class="variety">${price.variety}</div>
+                        <div class="price">${currencySymbol}${price.price.toFixed(2)} / ${price.unit}</div>
+                        <div class="meta">
+                            <span>📅 ${new Date(price.date).toLocaleDateString('nl-NL')}</span>
+                            <span>🌍 ${price.country}</span>
+                            <span>🏷️ ${price.commodity}</span>
+                            ${price.quality_grade ? `<span>⭐ ${price.quality_grade}</span>` : ''}
+                        </div>
+                    `;
+                    container.appendChild(item);
+                });
+
+            } catch (error) {
+                console.error('Error loading prices:', error);
+                container.innerHTML = '<div class="empty-state"><p>❌ Error bij laden van data</p></div>';
+            }
+        }
+
+        // Filter tabs
+        document.getElementById('filters').addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-tab')) {
+                document.querySelectorAll('.filter-tab').forEach(tab => tab.classList.remove('active'));
+                e.target.classList.add('active');
+                currentFilter = e.target.dataset.filter;
+                loadPrices();
+            }
+        });
+
+        // Refresh button
+        document.getElementById('refresh-btn').addEventListener('click', async () => {
+            const btn = document.getElementById('refresh-btn');
+            btn.classList.add('spinning');
+            
+            await Promise.all([loadSummary(), loadPrices()]);
+            
+            setTimeout(() => {
+                btn.classList.remove('spinning');
+            }, 500);
+        });
+
+        // Initial load
+        loadSummary();
+        loadPrices();
+
+        // Auto-refresh every 30 seconds
+        setInterval(() => {
+            loadSummary();
+            loadPrices();
+        }, 30000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+# Core dependencies for Agri-Market Scraper Engine
+# Python 3.10+ required
+
+# Web Scraping & Automation
+playwright==1.40.0
+playwright-stealth==1.0.5
+beautifulsoup4==4.12.2
+lxml==4.9.3
+html5lib==1.1
+
+# Data Processing
+pandas==2.1.4
+numpy==1.26.2
+
+# Data Validation & Models
+pydantic==2.5.3
+pydantic-settings==2.1.0
+
+# LLM Integration (for unstructured data extraction)
+openai==1.6.1
+
+# Database
+psycopg2-binary==2.9.9
+sqlalchemy==2.0.23
+
+# HTTP & Networking
+httpx==0.25.2
+aiohttp==3.9.1
+
+# PDF Processing
+PyPDF2==3.0.1
+pdfplumber==0.10.3
+
+# Utilities
+python-dotenv==1.0.0
+tenacity==8.2.3  # Retry logic
+fake-useragent==1.4.0  # User-agent rotation
+python-dateutil==2.8.2
+
+# Logging & Monitoring
+loguru==0.7.2
+
+# Testing (optional)
+pytest==7.4.3
+pytest-asyncio==0.21.1
