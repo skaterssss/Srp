@@ -27,8 +27,21 @@ Dit repository bevat documentatie en (toekomstige) tools voor het beheren en pub
 
 ## Documentatie
 
-- [`DATA_LICENSING_CHECKLIST.md`](DATA_LICENSING_CHECKLIST.md) - Checklist voor verificatie van publicatierechten
-- [`DATA_SOURCE.md`](DATA_SOURCE.md) - Informatie over de databron en licentie status
+### 📋 Essentiële Documenten (Start Hier)
+
+1. **[ANTWOORD_OP_UW_VRAAG.md](ANTWOORD_OP_UW_VRAAG.md)** - ⭐ **START HIER**: Direct antwoord op de vraag "Mag ik deze data publiceren?"
+2. **[DECISION_FLOWCHART.md](DECISION_FLOWCHART.md)** - Visuele beslisboom om te bepalen wat wel/niet mag
+3. **[DATA_LICENSING_CHECKLIST.md](DATA_LICENSING_CHECKLIST.md)** - Complete checklist voor verificatie van publicatierechten
+
+### 📞 Praktische Tools
+
+4. **[CONTACT_TEMPLATE.md](CONTACT_TEMPLATE.md)** - Email templates om LNCN te contacteren
+5. **[PERMISSION_DOCUMENTATION_TEMPLATE.md](PERMISSION_DOCUMENTATION_TEMPLATE.md)** - Template voor het documenteren van verkregen toestemming
+
+### 📚 Achtergrond Informatie
+
+6. **[LEGAL_BACKGROUND.md](LEGAL_BACKGROUND.md)** - Uitgebreide juridische context over EU/NL data rechten
+7. **[DATA_SOURCE.md](DATA_SOURCE.md)** - Informatie over de LNCN databron en licentie status
 
 ## Juridische Overwegingen
 
