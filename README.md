@@ -6,6 +6,12 @@ Dit project onderzoekt de mogelijkheid om groenteprijzen data van LNCN te public
 
 **STATUS**: 🔴 **NIET GEVERIFIEERD** - Publicatie is momenteel NIET toegestaan tot schriftelijke toestemming van LNCN is verkregen.
 
+## ⚡ Snelstart
+
+**Nieuw hier? Begin met [QUICK_START.md](QUICK_START.md) - leestijd: 5 minuten**
+
+**Direct antwoord nodig? Lees [ANTWOORD_OP_UW_VRAAG.md](ANTWOORD_OP_UW_VRAAG.md)**
+
 ## Overzicht
 
 Dit repository bevat documentatie en (toekomstige) tools voor het beheren en publiceren van groenteprijzen data, mits de juiste licenties en toestemmingen zijn verkregen.
@@ -27,9 +33,13 @@ Dit repository bevat documentatie en (toekomstige) tools voor het beheren en pub
 
 ## Documentatie
 
-### 📋 Essentiële Documenten (Start Hier)
+### ⚡ Snelstart
 
-1. **[ANTWOORD_OP_UW_VRAAG.md](ANTWOORD_OP_UW_VRAAG.md)** - ⭐ **START HIER**: Direct antwoord op de vraag "Mag ik deze data publiceren?"
+0. **[QUICK_START.md](QUICK_START.md)** - 🚀 **BEGIN HIER**: Snelste route naar een antwoord (5 minuten)
+
+### 📋 Essentiële Documenten
+
+1. **[ANTWOORD_OP_UW_VRAAG.md](ANTWOORD_OP_UW_VRAAG.md)** - ⭐ Direct antwoord: "Mag ik deze data publiceren?"
 2. **[DECISION_FLOWCHART.md](DECISION_FLOWCHART.md)** - Visuele beslisboom om te bepalen wat wel/niet mag
 3. **[DATA_LICENSING_CHECKLIST.md](DATA_LICENSING_CHECKLIST.md)** - Complete checklist voor verificatie van publicatierechten
 
