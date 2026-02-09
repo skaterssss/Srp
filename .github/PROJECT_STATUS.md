@@ -3,9 +3,18 @@
 ## 📊 Huidige Status
 
 **Project**: Groenteprijzen Data Publicatie  
-**Databron**: LNCN (via jaarlijks abonnement)  
-**Status**: 🔴 **JURIDISCHE VERIFICATIE VEREIST**  
+**Databron**: LNCN (via jaarlijks abonnement) + DG AGRI (open data)  
+**Status**: 🟡 **EVALUATIE FASE - Open Data Optie Beschikbaar**  
 **Laatste Update**: 9 februari 2026
+
+### 🌟 Belangrijke Update
+
+**DG AGRI Open Data Assessment Compleet**:
+- ✅ Aardappelen: **EXCELLENT** open data beschikbaar (weekly, 10+ jaar)
+- ✅ Uien: **GOED** open data beschikbaar (weekly/monthly)
+- ⚠️ Peen: **BEPERKT** open data beschikbaar (monthly, minder detail)
+
+**Impact**: Voor aardappelen en uien is LNCN toestemming mogelijk **NIET NODIG**. DG AGRI biedt excellent open data alternatieven.
 
 ---
 
@@ -305,8 +314,9 @@ Taken worden pas gedefinieerd na toestemming, omdat de voorwaarden de implementa
 - Commercieel?
 - Educatief?
 
-**Q2**: Welke specifieke data is nodig?
-- Alle groentesoorten of selectie?
+**Q2**: Welke specifieke data is nodig? **[PARTIALLY ANSWERED]**
+- Groentesoorten: **Uien, Aardappelen, Peen**
+- DG AGRI assessment: Aardappelen (excellent), Uien (goed), Peen (beperkt)
 - Welke tijdsperiode?
 - Welke data velden?
 
@@ -315,6 +325,12 @@ Taken worden pas gedefinieerd na toestemming, omdat de voorwaarden de implementa
 - API?
 - Repository?
 - Research paper?
+
+**Q4**: Is DG AGRI data voldoende? **[NEW - CRITICAL]**
+- Voor aardappelen: Waarschijnlijk ja
+- Voor uien: Waarschijnlijk ja
+- Voor peen: Mogelijk aanvulling nodig
+- **BESLISSING VEREIST**: Open data route OF hybride met LNCN?
 
 ---
 

@@ -36,6 +36,7 @@ Dit repository bevat documentatie en (toekomstige) tools voor het beheren en pub
 ### ⚡ Snelstart
 
 0. **[QUICK_START.md](QUICK_START.md)** - 🚀 **BEGIN HIER**: Snelste route naar een antwoord (5 minuten)
+0. **[DG_AGRI_SAMENVATTING.md](DG_AGRI_SAMENVATTING.md)** - 🌟 **GOED NIEUWS**: Open data alternatieven beschikbaar!
 
 ### 📋 Essentiële Documenten
 
@@ -52,6 +53,7 @@ Dit repository bevat documentatie en (toekomstige) tools voor het beheren en pub
 
 6. **[LEGAL_BACKGROUND.md](LEGAL_BACKGROUND.md)** - Uitgebreide juridische context over EU/NL data rechten
 7. **[DATA_SOURCE.md](DATA_SOURCE.md)** - Informatie over de LNCN databron en licentie status
+8. **[OPEN_DATA_ALTERNATIEVEN.md](OPEN_DATA_ALTERNATIEVEN.md)** - ⭐ **NIEUW**: Open data bronnen (DG AGRI, CBS, FAO) voor uien, aardappelen en peen
 
 ## Juridische Overwegingen
 
